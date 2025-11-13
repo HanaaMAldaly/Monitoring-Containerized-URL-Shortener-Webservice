@@ -22,6 +22,16 @@
     .btn-primary:hover {
       background-color: #2851a3;
     }
+    .btn-outline-primary {
+      border-radius: 10px;
+      font-weight: 500;
+      color: #3366cc;
+      border-color: #3366cc;
+    }
+    .btn-outline-primary:hover {
+      background-color: #3366cc;
+      color: white;
+    }
     .qr {
       width: 180px;
       height: 180px;
@@ -32,6 +42,11 @@
 
 <div class="card p-4 text-center">
   <h3 class="mb-3 text-primary">Monitoring Containerized URL Shortener</h3>
+  <div class="text-end mb-3">
+    <a href="{{ url_for('dashboard') }}" class="btn btn-outline-primary">
+      📊 View Dashboard
+    </a>
+  </div>
 
   <form method="POST">
     <input type="url" name="url" class="form-control mb-3" placeholder="Enter your long URL here" required>
@@ -48,12 +63,12 @@
 
   <h6 class="text-center">QR Code:</h6>
   <div class="d-flex justify-content-center">
-   <img class="qr mb-3" src="data:image/png;base64,{{ qr_data }}" alt="QR Code">
-   </div>
-  <div class="text-center">
-   <a href="data:image/png;base64,{{ qr_data }}" download="qr_code.png" class="btn btn-success btn-sm">Download QR</a>
+     <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code" class="img-fluid" style="max-width:200px;">
   </div>
 
+  <div class="text-center">
+    <a href="{{ url_for('download_qr', short_code=short_url.split('/')[-1]) }}" class="btn btn-primary mt-2">Download QR</a>
+  </div>
   {% endif %}
 </div>
 
@@ -76,7 +91,6 @@ function copyToClipboard() {
   }, 1000);
 }
 </script>
-
 
 </body>
 </html>
