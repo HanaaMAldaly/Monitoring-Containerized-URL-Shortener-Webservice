@@ -50,18 +50,19 @@ The entire application is containerized using Docker and orchestrated with Docke
 
 ## 📂 Project Structure
 
+ ```
 Monitoring-Containerized-URL-Shortener-Webservice/
 ├── .github/
 │   └── workflows/
-│       └── docker-image.yml
+│       └── deploy.yml
 ├── app.py
 ├── requirements.txt
 ├── Dockerfile
 ├── docker-compose.yml
 ├── templates/
 ├── static/
-├── prometheus/
-└── grafana/
+├── database.db
+```
 
 ---
 
@@ -90,13 +91,23 @@ docker-compose up --build
 it will run on http://localhost:5000
 
 ## 🐳 DockerFiles :
+
     * Dockerfile: builds a lightweight Python 3.11 environment, installs the app dependencies, and copies your project files into the container. It then exposes port 5000 and runs your Flask application using python app.py
     * docker-compose:  runs two services: a Flask web app and a PostgreSQL database, where the web app builds
 
 ## 🏭 Deployment
-Cloud AWS
+ ### deploy.yml:
+ This GitHub Actions workflow automates the deployment process of the containerized URL Shortener web service.
+ When a new commit is pushed to the main branch, the workflow performs the following steps:
+* Checks out the repository code to the runner machine.
+* Builds and runs the Docker containers using docker compose to ensure the application works correctly before deployment.
+* Creates a deployment package (deploy.zip) containing the application code, excluding any Git-related files.
+* Deploys the application to AWS Elastic Beanstalk, using the provided AWS access keys stored in GitHub Secrets.
 
-## Team members
+
+Overall, this workflow provides an automated CI/CD pipeline that tests, packages, and deploys the URL Shortener service to AWS with every new push to the main branch.
+
+# 🛠️ Team members
     * Ahmed Kamal
     * Hazem
     * Hanaa Mahmoud
