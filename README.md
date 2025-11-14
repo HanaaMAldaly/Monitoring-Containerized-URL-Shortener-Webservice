@@ -8,7 +8,7 @@ This project involves creating a webservice that shortens URLs, stores the  mapp
     * Docker Compose
     * Premosthes and Grafana
     * Python
-    * [QrCode](https://pypi.org/project/qrcode/)
+    * [qrcode – Python QR Code Generator](https://pypi.org/project/qrcode/)
     * Web framework
     * Postgres database
 ## Team members
