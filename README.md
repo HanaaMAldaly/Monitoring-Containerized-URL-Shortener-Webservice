@@ -107,7 +107,7 @@ it will run on http://localhost:5000
 
 Overall, this workflow provides an automated CI/CD pipeline that tests, packages, and deploys the URL Shortener service to AWS with every new push to the main branch.
 
-# 🛠️ Team members
+# 🧑‍💻 Team members
     * Ahmed Kamal
     * Hazem
     * Hanaa Mahmoud
