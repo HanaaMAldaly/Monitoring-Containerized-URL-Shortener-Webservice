@@ -1,0 +1,38 @@
+name: Simple CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies and Run Tests
+        run: |
+          pip install -r requirements.txt
+          pytest -v
+
+      - name: Build and Run containers
+        run: |
+             docker compose up --build -d
+             docker ps
+             sleep 10
+             docker logs shortener_app
+
+      -  name: Create deployment package
+         run: zip -r deploy.zip . -x '*.git*'
+
+      - name: Deploy to elastic beanstalks
+        uses: einaregilsson/beanstalk-deploy@v20
+        with:
+         aws_access_key: ${{secrets.aws_Access_Key}}
+         aws_secret_key: ${{secrets.aws_Secret_Key}}
+         application_name: 'URL-Shortner-Webservice'
+         environment_name : "URL-Shortner-Webservice-env"
+         region: "eu-north-1"
+         version_label: ${{github.sha}}
+         deployment_package: deploy.zip
