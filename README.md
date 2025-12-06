@@ -55,6 +55,7 @@ Monitoring-Containerized-URL-Shortener-Webservice/
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml
+├── grafana/
 ├── app.py
 ├── requirements.txt
 ├── Dockerfile
@@ -62,6 +63,8 @@ Monitoring-Containerized-URL-Shortener-Webservice/
 ├── templates/
 ├── static/
 ├── database.db
+├── test_app.py
+├── prometheus.yml
 ```
 
 ---
