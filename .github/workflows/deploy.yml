@@ -5,12 +5,16 @@ on:
     branches: [ main ]
 
 jobs:
-  run-app:
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Install dependencies and Run Tests
+        run: |
+          pip install -r requirements.txt
+          pytest -v
 
       - name: Build and Run containers
         run: |
